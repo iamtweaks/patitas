@@ -1,0 +1,199 @@
+/* ============================================
+   Patitas — Canagua Forest palette
+   Peluquería y baño canino
+   ============================================ */
+:root {
+  --pine: #1f3a2e;
+  --pine-deep: #14241c;
+  --bark: #6b4f3a;
+  --bark-soft: #8c6e54;
+  --bone: #f5efe6;
+  --bone-dim: #d8cdb8;
+  --sage: #7ba07a;
+  --amber: #d98e3e;
+  --coral: #c75d4f;
+  --forest: #2d5a3f;
+
+  --border: rgba(245, 239, 230, 0.10);
+  --border-strong: rgba(245, 239, 230, 0.22);
+  --bg: var(--pine-deep);
+  --bg-elev: var(--pine);
+
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.25);
+  --shadow-md: 0 12px 30px rgba(0,0,0,0.4);
+  --shadow-amber: 0 6px 24px rgba(217, 142, 62, 0.35);
+
+  --grad-warm: linear-gradient(135deg, var(--amber) 0%, var(--coral) 100%);
+  --grad-forest: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--bone);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 80% 0%, rgba(217, 142, 62, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 50%, rgba(45, 90, 63, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(123, 160, 122, 0.10) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+::selection { background: var(--amber); color: var(--pine-deep); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+
+a { color: var(--amber); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--coral); }
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(2rem, 4.5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
+
+p { color: var(--bone-dim); }
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+section { padding: 4rem 0; }
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  font-family: inherit;
+}
+.btn-primary {
+  background: var(--grad-warm);
+  color: var(--pine-deep);
+  box-shadow: var(--shadow-amber);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(217, 142, 62, 0.5);
+}
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-ghost {
+  background: transparent;
+  border-color: var(--bone-dim);
+  color: var(--bone);
+}
+.btn-ghost:hover {
+  background: var(--bone);
+  color: var(--pine-deep);
+}
+.btn-danger {
+  background: transparent;
+  border-color: var(--coral);
+  color: var(--coral);
+}
+.btn-danger:hover { background: var(--coral); color: var(--bone); }
+
+/* Forms */
+input, select, textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  background: rgba(245, 239, 230, 0.06);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  color: var(--bone);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--amber);
+  background: rgba(245, 239, 230, 0.10);
+}
+input::placeholder, textarea::placeholder { color: rgba(245, 239, 230, 0.4); }
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sage);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.02em;
+}
+.field { margin-bottom: 1rem; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+
+/* Cards */
+.card {
+  background: linear-gradient(160deg, var(--bg-elev) 0%, var(--bg) 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.table th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sage);
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border-strong);
+  font-weight: 700;
+}
+.table td {
+  padding: 0.75rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--bone-dim);
+}
+.table tr:hover td { background: rgba(245, 239, 230, 0.03); }
+.table tr:last-child td { border-bottom: none; }
+
+/* Tags / chips */
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3em 0.75em;
+  border-radius: 999px;
+  background: rgba(123, 160, 122, 0.15);
+  color: var(--sage);
+  border: 1px solid rgba(123, 160, 122, 0.35);
+}
+.tag-bano { background: rgba(91, 154, 195, 0.18); color: #87c5e8; border-color: rgba(91, 154, 195, 0.4); }
+.tag-corte { background: rgba(217, 142, 62, 0.18); color: var(--amber); border-color: rgba(217, 142, 62, 0.4); }
+.tag-completo { background: rgba(123, 160, 122, 0.18); color: var(--sage); border-color: rgba(123, 160, 122, 0.4); }
+.tag-otro { background: rgba(245, 239, 230, 0.10); color: var(--bone-dim); border-color: var(--border-strong); }
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) both; }

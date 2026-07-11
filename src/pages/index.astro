@@ -1,0 +1,126 @@
+---
+import Public from '../layouts/Public.astro';
+---
+<Public>
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">Software de gestión · Argentina</span>
+      <h1 class="hero-title">Tu peluquería canina,<br /><span class="hl">ordenada de una vez</span></h1>
+      <p class="hero-sub">
+        Registrá cada cliente, cada perro, cada baño y corte. Patitas lleva el control
+        de precios, te muestra cuánto ganaste este mes, qué perros son los más
+        frecuentes y mucho más.
+      </p>
+      <div class="hero-cta">
+        <a href="/login" class="btn btn-primary">Empezar gratis</a>
+        <a href="#features" class="btn btn-ghost">Ver qué hace</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="card feat">
+          <div class="feat-icon" style="background: var(--grad-forest);">🐕</div>
+          <h3>Clientes y perros</h3>
+          <p>Cargá cada dueño con sus perros, raza, tamaño y notas. Encontrá todo en un click.</p>
+        </div>
+        <div class="card feat">
+          <div class="feat-icon" style="background: var(--grad-warm);">💧</div>
+          <h3>Servicios rápidos</h3>
+          <p>Un baño, un corte, completo. Anotá el precio, la fecha y listo. Tres taps.</p>
+        </div>
+        <div class="card feat">
+          <div class="feat-icon" style="background: linear-gradient(135deg, var(--bark), var(--amber));">📊</div>
+          <h3>Dashboard en vivo</h3>
+          <p>Ganancia del mes, perros frecuentes, razas más comunes, cortes vs baños. Todo en una pantalla.</p>
+        </div>
+        <div class="card feat">
+          <div class="feat-icon" style="background: linear-gradient(135deg, var(--sage), var(--bone));">🔒</div>
+          <h3>Privado y seguro</h3>
+          <p>Tus datos, solo tuyos. Login con email, sin compartir nada con nadie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container container-narrow cta-inner">
+      <h2>Dejá la planilla, empezá con Patitas</h2>
+      <p>Es gratis, sin tarjeta, sin trampa. Si te sirve, pagás cuando te sirva.</p>
+      <a href="/login" class="btn btn-primary">Crear cuenta</a>
+    </div>
+  </section>
+</Public>
+
+<style>
+  .hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title {
+    font-weight: 800;
+    color: var(--bone);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .hl {
+    background: var(--grad-warm);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    max-width: 620px;
+    margin: 0 auto 2rem;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .features { padding: 3rem 0; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .feat { text-align: left; }
+  .feat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .feat h3 { font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--bone); }
+  .feat p { font-size: 0.92rem; }
+  .cta {
+    text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(217, 142, 62, 0.06));
+    padding: 5rem 0;
+  }
+  .cta-inner h2 {
+    color: var(--bone);
+    margin-bottom: 1rem;
+  }
+  .cta-inner p {
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+  }
+</style>

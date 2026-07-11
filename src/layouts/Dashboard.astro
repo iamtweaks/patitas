@@ -1,0 +1,149 @@
+---
+import '../styles/global.css';
+import { getServerClient } from '../lib/supabase';
+
+interface Props { title?: string; }
+const { title = 'Dashboard — Patitas' } = Astro.props;
+const path = Astro.url.pathname;
+
+const supabase = getServerClient(Astro.cookies);
+const { data: { user } } = await supabase.auth.getUser();
+
+// Middleware guarantees user exists for /dashboard routes
+const email = user?.email ?? '';
+
+const navItems = [
+  { href: '/dashboard', label: 'Resumen', icon: '📊' },
+  { href: '/dashboard/servicios', label: 'Servicios', icon: '✂️' },
+  { href: '/dashboard/perros', label: 'Perros', icon: '🐕' },
+  { href: '/dashboard/clientes', label: 'Clientes', icon: '👤' }
+];
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <a href="/" class="brand">
+          <span class="brand-mark">🐾</span>
+          <span class="brand-text">Patitas</span>
+        </a>
+        <nav class="sidebar-nav">
+          {navItems.map(item => (
+            <a href={item.href} class={`nav-item ${path === item.href ? 'active' : ''}`}>
+              <span class="nav-icon">{item.icon}</span>
+              <span>{item.label}</span>
+            </a>
+          ))}
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-info">
+            <div class="user-email">{email}</div>
+          </div>
+          <a href="/api/auth/logout" class="btn btn-ghost logout-btn">Salir</a>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <slot />
+      </main>
+    </div>
+
+    <style>
+      .app {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        min-height: 100vh;
+      }
+      .sidebar {
+        background: rgba(20, 36, 28, 0.85);
+        backdrop-filter: blur(14px);
+        border-right: 1px solid var(--border);
+        padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--amber);
+        margin-bottom: 2rem;
+        text-decoration: none;
+      }
+      .brand-mark { font-size: 1.5rem; }
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        flex: 1;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.7rem 0.9rem;
+        border-radius: 8px;
+        color: var(--bone-dim);
+        font-size: 0.92rem;
+        font-weight: 500;
+        transition: all 0.15s;
+      }
+      .nav-item:hover {
+        background: rgba(245, 239, 230, 0.05);
+        color: var(--bone);
+      }
+      .nav-item.active {
+        background: rgba(217, 142, 62, 0.15);
+        color: var(--amber);
+      }
+      .nav-icon { font-size: 1.1rem; }
+      .sidebar-footer {
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .user-info { padding: 0 0.25rem; }
+      .user-email {
+        font-size: 0.78rem;
+        color: var(--bone-dim);
+        word-break: break-all;
+      }
+      .logout-btn { font-size: 0.82rem; padding: 0.5rem 0.9rem; }
+      .main-content { padding: 2rem 2.5rem; max-width: 100%; overflow-x: auto; }
+      @media (max-width: 800px) {
+        .app { grid-template-columns: 1fr; }
+        .sidebar {
+          position: static;
+          height: auto;
+          flex-direction: row;
+          align-items: center;
+          padding: 0.75rem 1rem;
+        }
+        .brand { margin-bottom: 0; margin-right: auto; }
+        .sidebar-nav {
+          flex-direction: row;
+          gap: 0.5rem;
+          flex: 0;
+        }
+        .nav-item span:not(.nav-icon) { display: none; }
+        .sidebar-footer { border: none; padding: 0; flex-direction: row; }
+        .user-info { display: none; }
+        .main-content { padding: 1.5rem 1rem; }
+      }
+    </style>
+  </body>
+</html>
