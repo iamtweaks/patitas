@@ -11,10 +11,11 @@ export const POST: APIRoute = async ({ request, cookies, redirect, url }) => {
   }
 
   const supabase = getServerClient(cookies);
+  const siteUrl = (import.meta.env.PUBLIC_SITE_URL ?? url.origin).trim().replace(/\/$/, '');
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${url.origin}/auth/callback?next=${encodeURIComponent(next)}`
+      emailRedirectTo: `${siteUrl}/login?next=${encodeURIComponent(next)}`
     }
   });
 

@@ -1,10 +1,11 @@
 ---
 import '../styles/global.css';
+import SupabaseAuthRedirect from '../components/SupabaseAuthRedirect';
 interface Props { title?: string; }
 const { title = 'Patitas — Peluquería canina' } = Astro.props;
 const path = Astro.url.pathname;
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = (import.meta.env.PUBLIC_SUPABASE_URL ?? '').trim();
+const supabaseAnonKey = (import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '').trim();
 ---
 <!doctype html>
 <html lang="es">
@@ -16,31 +17,8 @@ const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     <title>{title}</title>
   </head>
   <body>
-    <script type="module" define:vars={{ supabaseUrl, supabaseAnonKey }}>
-      import { createClient } from '@supabase/supabase-js';
+    <SupabaseAuthRedirect client:load supabaseUrl={supabaseUrl} supabaseAnonKey={supabaseAnonKey} />
 
-      const hash = new URLSearchParams(window.location.hash.slice(1));
-      const accessToken = hash.get('access_token');
-      const refreshToken = hash.get('refresh_token');
-      const next = new URLSearchParams(window.location.search).get('next') || '/dashboard';
-
-      if (accessToken && refreshToken && supabaseUrl && supabaseAnonKey) {
-        const supabase = createClient(supabaseUrl, supabaseAnonKey);
-        supabase.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        }).then(({ error }) => {
-          if (error) {
-            window.location.replace(`/login?error=${encodeURIComponent('No pudimos terminar el login: ' + error.message)}`);
-            return;
-          }
-          window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
-          window.location.replace(next);
-        }).catch((error) => {
-          window.location.replace(`/login?error=${encodeURIComponent('No pudimos terminar el login: ' + error.message)}`);
-        });
-      }
-    </script>
     <nav class="topnav">
       <div class="container nav-inner">
         <a href="/" class="brand">
