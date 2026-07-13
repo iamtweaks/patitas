@@ -1,22 +1,15 @@
 ---
 import '../styles/global.css';
-import { getServerClient } from '../lib/supabase';
 
 interface Props { title?: string; }
 const { title = 'Dashboard — Patitas' } = Astro.props;
 const path = Astro.url.pathname;
 
-const supabase = getServerClient(Astro.cookies);
-const { data: { user } } = await supabase.auth.getUser();
-
-// Middleware guarantees user exists for /dashboard routes
-const email = user?.email ?? '';
-
 const navItems = [
   { href: '/dashboard', label: 'Resumen', icon: '📊' },
   { href: '/dashboard/servicios', label: 'Servicios', icon: '✂️' },
   { href: '/dashboard/perros', label: 'Perros', icon: '🐕' },
-  { href: '/dashboard/clientes', label: 'Clientes', icon: '👤' }
+  { href: '/dashboard/clientes', label: 'Clientes', icon: '👤' },
 ];
 ---
 <!doctype html>
@@ -44,9 +37,9 @@ const navItems = [
         </nav>
         <div class="sidebar-footer">
           <div class="user-info">
-            <div class="user-email">{email}</div>
+            <div class="user-email">Sesión local</div>
           </div>
-          <a href="/api/auth/logout" class="btn btn-ghost logout-btn">Salir</a>
+          <button id="logout-btn" class="btn btn-ghost logout-btn" type="button">Salir</button>
         </div>
       </aside>
 
@@ -54,6 +47,21 @@ const navItems = [
         <slot />
       </main>
     </div>
+
+    <script is:inline>
+      const currentPath = window.location.pathname;
+      const session = window.localStorage.getItem('patitas.auth.session');
+      if (!session) {
+        window.location.replace(`/login?next=${encodeURIComponent(currentPath + window.location.search)}`);
+      }
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          window.localStorage.removeItem('patitas.auth.session');
+          window.location.replace('/login');
+        });
+      }
+    </script>
 
     <style>
       .app {

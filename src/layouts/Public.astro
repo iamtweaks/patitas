@@ -1,102 +1,73 @@
 ---
 import '../styles/global.css';
-import SupabaseAuthRedirect from '../components/SupabaseAuthRedirect';
+
 interface Props { title?: string; }
-const { title = 'Patitas — Peluquería canina' } = Astro.props;
-const path = Astro.url.pathname;
-const supabaseUrl = (import.meta.env.PUBLIC_SUPABASE_URL ?? '').trim();
-const supabaseAnonKey = (import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '').trim();
+const { title = 'Patitas' } = Astro.props;
 ---
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
   <body>
-    <SupabaseAuthRedirect client:load supabaseUrl={supabaseUrl} supabaseAnonKey={supabaseAnonKey} />
-
-    <nav class="topnav">
-      <div class="container nav-inner">
+    <header class="site-header">
+      <div class="container header-inner">
         <a href="/" class="brand">
           <span class="brand-mark">🐾</span>
           <span class="brand-text">Patitas</span>
         </a>
-        <div class="nav-links">
-          <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
-          <a href="/dashboard" class={path.startsWith('/dashboard') ? 'active' : ''}>Dashboard</a>
-          <a href="/login" class="btn-mini">Entrar</a>
-        </div>
+        <nav class="header-nav">
+          <a href="/dashboard">Dashboard</a>
+          <a href="/login">Entrar</a>
+        </nav>
       </div>
-    </nav>
-
-    <main><slot /></main>
-
-    <footer>
-      <div class="container footer-inner">
-        <p>Patitas — peluquería y baño canino · Hecho con ❤</p>
-      </div>
-    </footer>
+    </header>
+    <main>
+      <slot />
+    </main>
 
     <style>
-      .topnav {
+      .site-header {
         position: sticky;
         top: 0;
-        z-index: 50;
-        backdrop-filter: blur(14px);
+        z-index: 30;
         background: rgba(20, 36, 28, 0.78);
+        backdrop-filter: blur(14px);
         border-bottom: 1px solid var(--border);
       }
-      .nav-inner {
+      .header-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem 1.5rem;
+        min-height: 72px;
       }
       .brand {
         display: flex;
         align-items: center;
         gap: 0.6rem;
         font-weight: 700;
-        font-size: 1.3rem;
-        color: var(--bone);
+        font-size: 1.15rem;
+        color: var(--amber);
+        text-decoration: none;
       }
-      .brand-mark { font-size: 1.5rem; }
-      .brand-text { color: var(--amber); letter-spacing: 0.02em; }
-      .nav-links {
+      .brand-mark { font-size: 1.4rem; }
+      .header-nav {
         display: flex;
+        gap: 1rem;
         align-items: center;
-        gap: 1.75rem;
       }
-      .nav-links a:not(.btn-mini) {
-        font-size: 0.92rem;
-        font-weight: 500;
+      .header-nav a {
         color: var(--bone-dim);
-      }
-      .nav-links a:not(.btn-mini).active,
-      .nav-links a:not(.btn-mini):hover { color: var(--amber); }
-      .btn-mini {
-        padding: 0.5rem 1.1rem;
-        background: var(--grad-warm);
-        color: var(--pine-deep);
-        border-radius: 999px;
         font-weight: 600;
-        font-size: 0.88rem;
+        font-size: 0.92rem;
       }
-      .btn-mini:hover { transform: translateY(-1px); box-shadow: var(--shadow-amber); }
-      footer {
-        margin-top: 5rem;
-        padding: 2.5rem 0;
-        border-top: 1px solid var(--border);
-        background: rgba(20, 36, 28, 0.6);
-      }
-      .footer-inner { text-align: center; color: var(--bone-dim); font-size: 0.9rem; }
+      .header-nav a:hover { color: var(--bone); }
       @media (max-width: 600px) {
-        .nav-links { gap: 1rem; }
-        .nav-links a:not(.btn-mini):not(.active) { display: none; }
+        .header-inner { gap: 0.75rem; }
+        .header-nav { gap: 0.75rem; }
       }
     </style>
   </body>
