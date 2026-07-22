@@ -764,33 +764,35 @@ export default function BrowserStorageApp({ page }: Props) {
 
       <style>{`
         .page-head { margin-bottom: 1.5rem; }
-        .page-head h1 { font-size: 1.8rem; color: var(--bone); margin-bottom: 0.2rem; }
+        .page-head h1 { font-size: 1.8rem; color: var(--ink); margin-bottom: 0.2rem; }
         .page-head-row { display: flex; justify-content: space-between; align-items: flex-end; }
-        .sub { color: var(--bone-dim); font-size: 0.92rem; }
+        .sub { color: var(--gray-500); font-size: 0.92rem; }
         .layout { display: grid; grid-template-columns: 360px 1fr; gap: 1.25rem; }
         @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
-        .form-card h3, .list-card h3 { margin-bottom: 1rem; color: var(--bone); font-size: 1.05rem; }
+        .form-card h3, .list-card h3 { margin-bottom: 1rem; color: var(--ink); font-size: 1.05rem; }
         .form-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
-        .empty { color: var(--bone-dim); padding: 1rem 0; text-align: center; }
+        .empty { color: var(--gray-500); padding: 1rem 0; text-align: center; }
         .empty-state { text-align: center; padding: 2rem 1rem; }
-        .empty-state h3 { color: var(--amber); margin-bottom: 0.5rem; }
-        .raza-small { font-size: 0.78rem; color: var(--bone-dim); }
-        .price { text-align: right; font-weight: 700; color: var(--amber); }
+        .empty-state h3 { color: var(--ink); margin-bottom: 0.5rem; }
+        .raza-small { font-size: 0.78rem; color: var(--gray-400); }
+        .price { text-align: right; font-weight: 700; color: var(--ink); }
         .actions { text-align: right; white-space: nowrap; }
         .btn-mini-action {
           font-size: 0.78rem; padding: 0.3rem 0.7rem; border-radius: 6px;
-          background: rgba(217, 142, 62, 0.15); color: var(--amber);
-          border: 1px solid rgba(217, 142, 62, 0.3); cursor: pointer; margin-left: 0.35rem;
+          background: var(--paper); color: var(--ink);
+          border: 1px solid var(--border-strong); cursor: pointer; margin-left: 0.35rem;
+          transition: all 0.18s;
         }
-        .btn-mini-action.danger { background: rgba(199, 93, 79, 0.12); color: #f4a89c; border-color: rgba(199, 93, 79, 0.35); }
-        .btn-mini-action:hover { background: rgba(217, 142, 62, 0.3); }
+        .btn-mini-action.danger { color: var(--gray-500); }
+        .btn-mini-action:hover { background: var(--paper-3); border-color: var(--ink); }
+        .btn-mini-action.danger:hover { background: var(--ink); color: var(--paper); }
         .auth-page { padding: 4rem 0; }
         .auth-card { max-width: 460px; margin: 0 auto; }
-        .auth-card h1 { margin-bottom: 0.4rem; color: var(--bone); }
+        .auth-card h1 { margin-bottom: 0.4rem; color: var(--ink); }
         .lead { margin-bottom: 1.3rem; }
         .auth-btn { width: 100%; margin-top: 0.25rem; }
         .footer-note { font-size: 0.85rem; margin-top: 1rem; }
-        .alert { background: rgba(199, 93, 79, 0.15); color: #f4b5ae; border: 1px solid rgba(199, 93, 79, 0.35); padding: 0.75rem 0.9rem; border-radius: 10px; margin-bottom: 1rem; }
+        .alert { background: var(--paper-3); color: var(--ink); border: 1px solid var(--border-strong); padding: 0.75rem 0.9rem; border-radius: 10px; margin-bottom: 1rem; }
       `}</style>
     </>
   );
