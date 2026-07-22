@@ -1,6 +1,6 @@
-# Patitas
+# Cuatro Patas Boutique
 
-App de gestión para peluquería y baño canino. Astro SSR + React islands + Supabase (Postgres + Auth) + Vercel.
+App de gestión para boutique de peluquería canina. Astro SSR + React islands + browser storage + Vercel.
 
 ## Stack
 - Astro 5 con `output: 'server'` (SSR) + Node adapter standalone

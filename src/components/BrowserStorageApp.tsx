@@ -169,7 +169,7 @@ export default function BrowserStorageApp({ page }: Props) {
       <section className="auth-page">
         <div className="container container-narrow">
           <div className="card auth-card animate-fade-up">
-            <h1>🐾 Entrar a Patitas</h1>
+            <h1>🐾 Entrar a Cuatro Patas Boutique</h1>
             <p className="lead">Usuario y contraseña quedan guardados en tu navegador. Sin Supabase, sin backend.</p>
             <form
               className="auth-form"
