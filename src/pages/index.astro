@@ -1,43 +1,111 @@
 ---
 import Public from '../layouts/Public.astro';
+import PawIcon from '../components/PawIcon.astro';
 ---
-<Public title="Patitas — Peluquería canina">
+<Public title="Cuatro Patas Boutique — Peluquería canina">
+  <!-- Animated paw watermark -->
+  <div class="paw-watermark" aria-hidden="true">
+    <PawIcon size={120} class="paw-watermark__icon paw-watermark__icon--1" />
+    <PawIcon size={80} class="paw-watermark__icon paw-watermark__icon--2" />
+    <PawIcon size={140} class="paw-watermark__icon paw-watermark__icon--3" />
+    <PawIcon size={60} class="paw-watermark__icon paw-watermark__icon--4" />
+  </div>
+
   <section class="hero">
     <div class="container hero-inner">
-      <span class="eyebrow">Software de gestión · Local-first</span>
-      <h1 class="hero-title">Tu peluquería canina,<br /><span class="hl">ordenada de una vez</span></h1>
-      <p class="hero-sub">
-        Registrá cada cliente, cada perro, cada baño y corte. Patitas lleva el control
-        de precios, te muestra cuánto ganaste este mes, qué perros son los más
-        frecuentes y todo queda guardado en tu navegador.
-      </p>
-      <div class="hero-cta">
-        <a href="/login" class="btn btn-primary">Empezar</a>
-        <a href="#features" class="btn btn-ghost">Ver qué hace</a>
+      <div class="hero-content">
+        <span class="eyebrow animate-fade-up">
+          <PawIcon size={14} class="eyebrow__paw" /> Software de gestión · Local-first
+        </span>
+        <h1 class="hero-title animate-fade-up delay-1">
+          Tu peluquería canina,<br /><span class="hl">ordenada de una vez</span>
+        </h1>
+        <p class="hero-sub animate-fade-up delay-2">
+          Registrá cada cliente, cada perro, cada baño y corte. Cuatro Patas Boutique lleva el control
+          de precios, te muestra cuánto ganaste este mes, qué perros son los más
+          frecuentes y todo queda guardado en tu navegador.
+        </p>
+        <div class="hero-cta animate-fade-up delay-3">
+          <a href="/login" class="btn btn-primary">
+            Empezar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#features" class="btn btn-ghost">Ver qué hace</a>
+        </div>
+        <div class="hero-stats animate-fade-up delay-4">
+          <div class="stat">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">local-first</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">0</span>
+            <span class="stat-label">datos en la nube</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">∞</span>
+            <span class="stat-label">perros registrados</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-art animate-fade-in" aria-hidden="true">
+        <div class="hero-dog">
+          <!-- Stylised dog SVG silhouette -->
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="dog-svg">
+            <!-- Body -->
+            <ellipse cx="100" cy="135" rx="55" ry="38" fill="#0a0a0a"/>
+            <!-- Head -->
+            <circle cx="135" cy="80" r="36" fill="#0a0a0a"/>
+            <!-- Snout -->
+            <ellipse cx="160" cy="92" rx="18" ry="14" fill="#0a0a0a"/>
+            <!-- Ear -->
+            <ellipse cx="115" cy="55" rx="14" ry="22" fill="#0a0a0a" transform="rotate(-25 115 55)"/>
+            <!-- Eye (white space) -->
+            <circle cx="145" cy="75" r="3.5" fill="#ffffff"/>
+            <!-- Nose -->
+            <circle cx="172" cy="88" r="4" fill="#ffffff"/>
+            <!-- Legs -->
+            <rect x="65" y="155" width="14" height="35" rx="6" fill="#0a0a0a"/>
+            <rect x="92" y="160" width="14" height="30" rx="6" fill="#0a0a0a"/>
+            <rect x="115" y="160" width="14" height="30" rx="6" fill="#0a0a0a"/>
+            <rect x="138" y="155" width="14" height="35" rx="6" fill="#0a0a0a"/>
+            <!-- Tail -->
+            <path d="M 50 130 Q 25 115 30 90" stroke="#0a0a0a" stroke-width="10" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="hero-paw-print">
+          <PawIcon size={48} class="hero-paw-print__icon" />
+        </div>
       </div>
     </div>
   </section>
 
   <section id="features" class="features">
     <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><PawIcon size={14} /> Funcionalidades</span>
+        <h2>Todo lo que necesitás para tu peluquería</h2>
+      </div>
       <div class="features-grid">
-        <div class="card feat">
-          <div class="feat-icon" style="background: var(--grad-forest);">🐕</div>
+        <div class="card feat reveal">
+          <div class="feat-icon"><PawIcon size={26} /></div>
           <h3>Clientes y perros</h3>
           <p>Cargá cada dueño con sus perros, raza, tamaño y notas. Encontrá todo en un click.</p>
         </div>
-        <div class="card feat">
-          <div class="feat-icon" style="background: var(--grad-warm);">💧</div>
+        <div class="card feat reveal delay-1">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div>
           <h3>Servicios rápidos</h3>
           <p>Un baño, un corte, completo. Anotá el precio, la fecha y listo. Tres taps.</p>
         </div>
-        <div class="card feat">
-          <div class="feat-icon" style="background: linear-gradient(135deg, var(--bark), var(--amber));">📊</div>
+        <div class="card feat reveal delay-2">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
           <h3>Dashboard en vivo</h3>
           <p>Ganancia del mes, perros frecuentes, razas más comunes, cortes vs baños. Todo en una pantalla.</p>
         </div>
-        <div class="card feat">
-          <div class="feat-icon" style="background: linear-gradient(135deg, var(--sage), var(--bone));">🔒</div>
+        <div class="card feat reveal delay-3">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <h3>Local y simple</h3>
           <p>Usuario y contraseña quedan en tu navegador. Nada de Supabase ni setups raros.</p>
         </div>
@@ -46,10 +114,251 @@ import Public from '../layouts/Public.astro';
   </section>
 
   <section class="cta">
-    <div class="container container-narrow cta-inner">
-      <h2>Dejá la planilla, empezá con Patitas</h2>
+    <div class="container container-narrow cta-inner reveal">
+      <PawIcon size={48} class="cta-paw" />
+      <h2>Dejá la planilla, pasate a Cuatro Patas Boutique</h2>
       <p>Guardado local en tu navegador. Después, si querés, le enchufamos una DB real.</p>
-      <a href="/login" class="btn btn-primary">Crear cuenta local</a>
+      <a href="/login" class="btn btn-primary">
+        Crear cuenta local
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </section>
 </Public>
+
+<script>
+  // Reveal-on-scroll: toggle .in-view on elements with .reveal when they enter the viewport.
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Subtle parallax for the dog SVG: shifts up/down with scroll, capped.
+  const dog = document.querySelector('.hero-dog') as HTMLElement | null;
+  if (dog) {
+    let raf = 0;
+    const update = () => {
+      const y = Math.min(window.scrollY, 600) * 0.08;
+      dog.style.transform = `translateY(${-y}px)`;
+      raf = 0;
+    };
+    window.addEventListener('scroll', () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    }, { passive: true });
+  }
+
+  // Button ripple: spawn a circle at click coordinates, animate, then clean up.
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', (ev) => {
+      const target = btn as HTMLElement;
+      const rect = target.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = (ev as MouseEvent).clientX - rect.left - size / 2;
+      const y = (ev as MouseEvent).clientY - rect.top - size / 2;
+      const span = document.createElement('span');
+      span.style.cssText = `
+        position:absolute; left:${x}px; top:${y}px;
+        width:${size}px; height:${size}px;
+        border-radius:50%; background:currentColor;
+        opacity:0.18; pointer-events:none;
+        transform:scale(0); transition:transform 0.6s ease-out, opacity 0.6s ease-out;
+      `;
+      target.appendChild(span);
+      requestAnimationFrame(() => {
+        span.style.transform = 'scale(4)';
+        span.style.opacity = '0';
+      });
+      setTimeout(() => span.remove(), 700);
+    });
+  });
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 5rem 0 6rem;
+    overflow: hidden;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    padding: 0.45rem 0.95rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--paper);
+  }
+  .eyebrow__paw { color: var(--ink); }
+  .hero-title { margin: 1.3rem 0 1.1rem; }
+  .hl {
+    background: linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.10) 60%);
+    padding: 0 0.1em;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--gray-500);
+    margin-bottom: 2rem;
+    max-width: 540px;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat { display: flex; flex-direction: column; gap: 0.15rem; }
+  .stat-num {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    font-weight: 600;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 28px;
+    background: var(--border-strong);
+  }
+
+  /* Hero art */
+  .hero-art {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-dog {
+    width: 88%;
+    max-width: 360px;
+    position: relative;
+    z-index: 2;
+    animation: dog-bob 4s ease-in-out infinite;
+  }
+  .dog-svg { width: 100%; height: auto; display: block; }
+  .hero-paw-print {
+    position: absolute;
+    bottom: 8%;
+    left: 12%;
+    z-index: 1;
+    color: var(--paper-3);
+    animation: paw-pulse 3s ease-in-out infinite;
+  }
+  .hero-paw-print__icon { display: block; }
+
+  @keyframes dog-bob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50%      { transform: translateY(-8px) rotate(-1deg); }
+  }
+  @keyframes paw-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.08); }
+  }
+
+  /* Watermark paws across the page */
+  .paw-watermark {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .paw-watermark__icon {
+    position: absolute;
+    color: var(--ink);
+    opacity: 0.05;
+  }
+  .paw-watermark__icon--1 { top: 6%; left: 4%; animation: drift 8s ease-in-out infinite; }
+  .paw-watermark__icon--2 { top: 38%; right: 6%; animation: drift 9s ease-in-out infinite reverse; }
+  .paw-watermark__icon--3 { bottom: 14%; left: 10%; animation: drift 10s ease-in-out infinite; }
+  .paw-watermark__icon--4 { top: 18%; left: 48%; animation: drift 7s ease-in-out infinite reverse; }
+
+  /* Sections */
+  .section-head {
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-head h2 { color: var(--ink); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .feat { display: flex; flex-direction: column; gap: 0.7rem; }
+  .feat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--paper-3);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .card:hover .feat-icon {
+    background: var(--ink);
+    color: var(--paper);
+    transform: scale(1.05);
+  }
+
+  .cta {
+    padding: 5rem 0 6rem;
+  }
+  .cta-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3.5rem 2rem;
+  }
+  .cta-paw { color: var(--ink); margin-bottom: 0.5rem; }
+
+  @media (max-width: 800px) {
+    .hero { padding: 3rem 0 4rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-art { order: -1; max-width: 280px; margin: 0 auto; }
+    .hero-stats { gap: 0.9rem; flex-wrap: wrap; }
+    .stat-divider { display: none; }
+    .paw-watermark__icon--3, .paw-watermark__icon--4 { display: none; }
+  }
+</style>
