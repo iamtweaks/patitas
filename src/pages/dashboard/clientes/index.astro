@@ -3,5 +3,5 @@ import Dashboard from '../../../layouts/Dashboard.astro';
 import BrowserStorageApp from '../../../components/BrowserStorageApp';
 ---
 <Dashboard title="Clientes — Patitas">
-  <BrowserStorageApp client:load page="clientes" />
+  <BrowserStorageApp client:only="react" page="clientes" />
 </Dashboard>

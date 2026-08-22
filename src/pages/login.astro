@@ -3,5 +3,5 @@ import Public from '../layouts/Public.astro';
 import BrowserStorageApp from '../components/BrowserStorageApp';
 ---
 <Public title="Entrar — Patitas">
-  <BrowserStorageApp client:load page="login" />
+  <BrowserStorageApp client:only="react" page="login" />
 </Public>
