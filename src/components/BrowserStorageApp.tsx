@@ -1,5 +1,4 @@
-import DashboardResumen from './DashboardResumen';
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import type { BrowserDb, Cliente, Perro, Servicio, Session } from '../lib/browserStore';
 import {
   clearSession,
@@ -16,6 +15,10 @@ import {
   todayISO,
   uid,
 } from '../lib/browserStore';
+
+// Lazy: dashboard analytics pulls in Recharts (~250KB). Only loaded when
+// the user lands on /dashboard. Login/clientes/perros/servicios never touch it.
+const DashboardResumen = lazy(() => import('./DashboardResumen'));
 
 type Page = 'login' | 'dashboard' | 'clientes' | 'perros' | 'servicios';
 
@@ -260,17 +263,19 @@ export default function BrowserStorageApp({ page }: Props) {
 
   if (page === 'dashboard') {
     return (
-      <DashboardResumen
-        clientes={clientes}
-        perros={perros}
-        servicios={servicios}
-        session={session}
-        onLogout={logout}
-        onReset={() => {
-          resetDb();
-          window.location.reload();
-        }}
-      />
+      <Suspense fallback={<div className="card empty-state">Cargando dashboard…</div>}>
+        <DashboardResumen
+          clientes={clientes}
+          perros={perros}
+          servicios={servicios}
+          session={session}
+          onLogout={logout}
+          onReset={() => {
+            resetDb();
+            window.location.reload();
+          }}
+        />
+      </Suspense>
     );
   }
 
