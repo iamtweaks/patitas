@@ -1,3 +1,4 @@
+import DashboardResumen from './DashboardResumen';
 import { useEffect, useMemo, useState } from 'react';
 import type { BrowserDb, Cliente, Perro, Servicio, Session } from '../lib/browserStore';
 import {
@@ -258,102 +259,18 @@ export default function BrowserStorageApp({ page }: Props) {
   };
 
   if (page === 'dashboard') {
-    const totalGanancia = servicios.reduce((sum, s) => sum + toNumber(s.precio), 0);
-    const monthKey = new Date().toISOString().slice(0, 7);
-    const serviciosMes = servicios.filter(s => s.fecha.startsWith(monthKey));
-    const gananciaMes = serviciosMes.reduce((sum, s) => sum + toNumber(s.precio), 0);
-    const counts = {
-      bano: servicios.filter(s => s.tipo === 'bano').length,
-      corte: servicios.filter(s => s.tipo === 'corte').length,
-      completo: servicios.filter(s => s.tipo === 'bano_y_corte').length,
-      otro: servicios.filter(s => s.tipo === 'otro').length,
-    };
-    const recent = servicios.slice(0, 6);
-
     return (
-      <>
-        <div className="page-head">
-          <h1>Hola, <span className="hl">{session.username}</span> 👋</h1>
-          <p className="sub">Todo queda guardado en tu navegador. Sin Supabase, sin backend.</p>
-        </div>
-
-        <div className="kpis">
-          <div className="card kpi">
-            <div className="kpi-label">Ganancia del mes</div>
-            <div className="kpi-value">{formatMoney(gananciaMes)}</div>
-            <div className="kpi-sub">{serviciosMes.length} servicios</div>
-          </div>
-          <div className="card kpi">
-            <div className="kpi-label">Ganancia total</div>
-            <div className="kpi-value">{formatMoney(totalGanancia)}</div>
-            <div className="kpi-sub">{servicios.length} servicios totales</div>
-          </div>
-          <div className="card kpi">
-            <div className="kpi-label">Clientes / Perros</div>
-            <div className="kpi-value">{clientes.length} / {perros.length}</div>
-            <div className="kpi-sub">Base local en este navegador</div>
-          </div>
-          <div className="card kpi">
-            <div className="kpi-label">Baños / Cortes / Completos</div>
-            <div className="kpi-value-sm">{counts.bano} / {counts.corte} / {counts.completo}</div>
-            <div className="kpi-sub">+ {counts.otro} otros</div>
-          </div>
-        </div>
-
-        <div className="card" style={{ marginBottom: '1rem' }}>
-          <h3 style={{ marginBottom: '1rem' }}>Últimos servicios</h3>
-          {recent.length === 0 ? (
-            <p className="empty">Todavía no registraste servicios.</p>
-          ) : (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Perro</th>
-                  <th>Dueño</th>
-                  <th>Tipo</th>
-                  <th>Precio</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recent.map(s => {
-                  const perro = perrosById[s.perroId];
-                  const cliente = perro ? clientesById[perro.clienteId] : null;
-                  return (
-                    <tr key={s.id}>
-                      <td>{s.fecha}</td>
-                      <td><strong>{perro?.nombre ?? '—'}</strong><br /><span className="raza-small">{perro?.raza ?? ''}</span></td>
-                      <td>{cliente?.nombre ?? '—'}</td>
-                      <td><span className={`tag tag-${s.tipo === 'bano' ? 'bano' : s.tipo === 'corte' ? 'corte' : s.tipo === 'bano_y_corte' ? 'completo' : 'otro'}`}>{s.tipo.replaceAll('_', ' ')}</span></td>
-                      <td className="price">{formatMoney(toNumber(s.precio))}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-        </div>
-
-        <div className="card empty-state">
-          <h3>Tu app ya no depende de Supabase</h3>
-          <p>Los usuarios, clientes, perros y servicios viven en el navegador. Si querés, después la pasamos a una DB real más adelante.</p>
-          <div style={{ marginTop: '1rem' }}>
-            <button className="btn btn-ghost" onClick={logout}>Salir</button>
-            <button
-              className="btn btn-danger"
-              style={{ marginLeft: '0.75rem' }}
-              onClick={() => {
-                if (confirm('¿Borrar toda la base local?')) {
-                  resetDb();
-                  window.location.reload();
-                }
-              }}
-            >
-              Reset local
-            </button>
-          </div>
-        </div>
-      </>
+      <DashboardResumen
+        clientes={clientes}
+        perros={perros}
+        servicios={servicios}
+        session={session}
+        onLogout={logout}
+        onReset={() => {
+          resetDb();
+          window.location.reload();
+        }}
+      />
     );
   }
 
